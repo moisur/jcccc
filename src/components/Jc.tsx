@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect,ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Check, Star, Menu, X, Phone, Mail, MapPin, ArrowUpRight, Lightbulb, Target, Users, Zap, Brain, Heart, Rocket } from 'lucide-react'
 import { Button } from "@/components/ui/button"
@@ -17,7 +17,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
-const NavItem = ({ href, children }) => (
+interface NavItemProps {
+  href: string;
+  children: ReactNode;
+}
+const NavItem: React.FC<NavItemProps> = ({ href, children }) => (
   <a href={href} className="relative group">
     <span className="text-gray-800 group-hover:text-purple-600 transition-colors duration-300">{children}</span>
     <span className="absolute left-0 bottom-0 w-full h-0.5 bg-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
@@ -64,8 +68,10 @@ const MovingBlobs = () => (
     />
   </div>
 )
-
-const FadeInSection = ({ children }) => {
+interface FadeInSectionProps {
+  children: ReactNode;
+}
+const FadeInSection: React.FC<FadeInSectionProps> = ({ children }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -210,7 +216,7 @@ export default function Jc() {
                     Êtes-vous <span className="text-purple-600 font-semibold">tiraillé entre vos nombreux talents</span>, mais freiné par des <span className="italic">doutes profonds</span> et des <span className="italic">schémas autodestructeurs</span> ?
                   </p>
                   <p className="text-lg mb-6 text-gray-700">
-                    Avez-vous l'impression de <span className="text-purple-600 font-semibold">courir dans tous les sens sans vraiment avancer</span> ?
+                    Avez-vous l&apos;impression de <span className="text-purple-600 font-semibold">courir dans tous les sens sans vraiment avancer</span> ?
                   </p>
                   <p className="text-lg mb-6 text-gray-700">
                     Il est temps de <span className="text-purple-600 font-semibold">transformer cette tempête intérieure</span> en une <span className="text-purple-600 font-semibold">force motrice pour votre succès</span>.
@@ -264,13 +270,13 @@ export default function Jc() {
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Focus Boost : Votre Tremplin vers le Succès</h2>
               <p className="text-lg mb-8 text-gray-700">
-                La vérité, c'est que votre multipotentialité est votre super pouvoir... une fois que vous avez appris à la maîtriser.
+                La vérité, c&apos;est que votre multipotentialité est votre super pouvoir... une fois que vous avez appris à la maîtriser.
               </p>
               <p className="text-lg mb-8 text-gray-700">
                 Imaginez-vous vous réveiller chaque matin avec une vision claire de votre voie idéale, ressentir une vague de motivation imparable et atteindre vos objectifs sans effort – tout en embrassant la richesse de vos passions.
               </p>
               <p className="text-lg mb-8 text-gray-700">
-                Focus Boost est votre feuille de route personnalisée vers la maîtrise de votre multipotentialité. Oubliez les affirmations creuses et les méthodes miracles. Le "Focus Boost", c'est bien plus qu'un simple accompagnement, c'est un véritable tremplin vers la vie qui vous ressemble.
+                Focus Boost est votre feuille de route personnalisée vers la maîtrise de votre multipotentialité. Oubliez les affirmations creuses et les méthodes miracles. Le &rdquo;Focus Boost&rdquo;, c&apos;est bien plus qu&apos;un simple accompagnement, c&apos;est un véritable tremplin vers la vie qui vous ressemble.
               </p>
               <h3 className="text-2xl font-bold mb-6 text-purple-600">Ce que vous obtiendrez</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -331,13 +337,13 @@ export default function Jc() {
                   Je suis JC, le Catalyseur de Clarté, et ma mission est de vous aider à capitaliser sur votre nature multi-passionnée tout en trouvant la clarté et la direction qui vous ont toujours échappé.
                 </p>
                 <p>
-                  J'ai vécu les mêmes défis que vous. J'ai jonglé avec mes passions, lutté contre mes envies divergentes et ressenti la paralysie face à la pression de "choisir une seule chose". Ces expériences m'ont conduit à développer une approche unique pour aider les multipotentiels comme vous à s'épanouir.
+                  J&apos;ai vécu les mêmes défis que vous. J&apos;ai jonglé avec mes passions, lutté contre mes envies divergentes et ressenti la paralysie face à la pression de &rdquo;choisir une seule chose&rdquo;. Ces expériences m&apos;ont conduit à développer une approche unique pour aider les multipotentiels comme vous à s&apos;apos;épanouir.
                 </p>
                 <p>
-                  Ma motivation pour vous aider vient de mon propre parcours. J'ai transformé mes luttes en force, et je veux partager ce chemin avec vous. Je crois profondément que votre multipotentialité est un don, pas un fardeau, et je suis déterminé à vous montrer comment en faire votre plus grand atout.
+                  Ma motivation pour vous aider vient de mon propre parcours. J&apos;ai transformé mes luttes en force, et je veux partager ce chemin avec vous. Je crois profondément que votre multipotentialité est un don, pas un fardeau, et je suis déterminé à vous montrer comment en faire votre plus grand atout.
                 </p>
                 <p>
-                  Avec mon programme, je m'engage à vous guider vers une vie de clarté absolue, de concentration efficace et de sens profond. Ensemble, nous allons débloquer votre potentiel et créer la vie épanouissante que vous méritez.
+                  Avec mon programme, je m&apos;engage à vous guider vers une vie declarté absolue, de concentration efficace et de sens profond. Ensemble, nous allons débloquer votre potentiel et créer la vie épanouissante que vous méritez.
                 </p>
               </div>
             </div>
@@ -433,13 +439,13 @@ export default function Jc() {
               <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Questions fréquentes</h2>
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1">
-                  <AccordionTrigger>Qu'est-ce qu'un multi-potentiel ?</AccordionTrigger>
+                  <AccordionTrigger>Qu&apos;est-ce qu&apos;un multi-potentiel ?</AccordionTrigger>
                   <AccordionContent>
-                    Un multi-potentiel est une personne qui possède de nombreux intérêts, talents et domaines d'expertise. Ces individus excellent souvent dans plusieurs domaines et ont du mal à se concentrer sur une seule carrière ou passion.
+                    Un multi-potentiel est une personne qui possède de nombreux intérêts, talents et domaines d&apos;expertise. Ces individus excellent souvent dans plusieurs domaines et ont du mal à se concentrer sur une seule carrière ou passion.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
-                  <AccordionTrigger>Comment votre coaching peut-il m'aider ?</AccordionTrigger>
+                  <AccordionTrigger>Comment votre coaching peut-il m&apos;aider ?</AccordionTrigger>
                   <AccordionContent>
                     Notre coaching vous aide à identifier vos forces uniques, à surmonter les obstacles internes, et à développer des stratégies pour harmoniser vos multiples passions. Nous vous guidons pour transformer votre polyvalence en un atout puissant pour votre réussite personnelle et professionnelle.
                   </AccordionContent>
