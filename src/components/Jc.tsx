@@ -197,7 +197,7 @@ export default function Jc() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl sm:text-2xl mb-12 text-gray-600"
           >
-            Devenez un multi potentiel accompli
+            Devenez un multi potentiel assumé
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -296,7 +296,7 @@ export default function Jc() {
                 Imaginez-vous vous réveiller chaque matin avec une vision claire de votre voie idéale, ressentir une vague de motivation imparable et atteindre vos objectifs sans effort – tout en embrassant la richesse de vos passions.
               </p>
               <p className="text-lg mb-8 text-gray-700">
-                Mon accompagnement est votre feuille de route personnalisée vers la maîtrise de votre multipotentialité. Oubliez les affirmations creuses et les méthodes miracles. Le &rdquo;Focus Boost&rdquo;, c&apos;est bien plus qu&apos;un simple accompagnement, c&apos;est un véritable tremplin vers la vie qui vous ressemble.
+                Mon accompagnement est votre feuille de route personnalisée vers la maîtrise de votre multipotentialité. Oubliez les affirmations creuses et les méthodes miracles. Mon processus, c&apos;est bien plus qu&apos;un simple accompagnement, c&apos;est un véritable tremplin vers la vie qui vous ressemble.
               </p>
               <h3 className="text-2xl font-bold mb-6 text-purple-600">Ce que vous obtiendrez</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
