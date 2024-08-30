@@ -8,6 +8,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useInView } from 'react-intersection-observer'
+import ShineBorder from "@/components/magicui/shine-border";
+import { AnimatedBeamDemo } from './AnimatedBeamDemo'
+import Meteors from "@/components/magicui/meteors";
 import Image from 'next/image'
 import imaaa from '../../public/1.jpg'
 import {
@@ -179,8 +182,15 @@ export default function Jc() {
             transition={{ duration: 0.8 }}
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-red-600"
           >
+
+          <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
+            <Meteors number={7} />
+            <span className="pointer-events-none whitespace-pre-wrap bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
             JC le catalyseur de clarté
+            </span>
+          </div>
           </motion.h1>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -206,6 +216,10 @@ export default function Jc() {
           </motion.div>
         </section>
 
+        <div className="mx-auto">
+        <AnimatedBeamDemo>
+        </AnimatedBeamDemo>
+        </div>
         <FadeInSection>
           <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
@@ -248,7 +262,10 @@ export default function Jc() {
                   { title: "Stratégies concrètes", description: "Adoptez des habitudes efficaces pour atteindre vos objectifs personnels et professionnels.", icon: <Target className="w-6 h-6 text-purple-600" /> },
                   { title: "Soutien continu", description: "Bénéficiez d'un accompagnement personnalisé pour assurer votre progression constante.", icon: <Users className="w-6 h-6 text-purple-600" /> }
                 ].map((service, index) => (
-                  <Card key={index} className="bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300">
+                  <ShineBorder
+                  className="bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300"
+                  color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+                  >
                     <CardHeader className="flex flex-row items-center space-x-4 pb-2">
                       <div className="p-2 bg-purple-100 rounded-full">
                         {service.icon}
@@ -258,7 +275,7 @@ export default function Jc() {
                     <CardContent>
                       <p className="text-gray-600">{service.description}</p>
                     </CardContent>
-                  </Card>
+                  </ShineBorder>
                 ))}
               </div>
             </div>
@@ -286,8 +303,10 @@ export default function Jc() {
                   { title: "Confiance inébranlable", description: "Brisez les chaînes du syndrome de l'imposteur et libérez le leader multipassionné qui sommeille en vous.", icon: <Heart className="w-6 h-6 text-purple-600" /> },
                   { title: "Vie riche de sens", description: "Transformez vos passions en une carrière épanouissante et donnez vie à vos projets les plus audacieux.", icon: <Rocket className="w-6 h-6 text-purple-600" /> }
                 ].map((benefit, index) => (
-                  <Card key={index} className="bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300">
-                    <CardHeader className="flex flex-row items-center space-x-4 pb-2">
+                  <ShineBorder
+                  className="bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300"
+                  color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+                  >                    <CardHeader className="flex flex-row items-center space-x-4 pb-2">
                       <div className="p-2 bg-purple-100 rounded-full">
                         {benefit.icon}
                       </div>
@@ -296,7 +315,7 @@ export default function Jc() {
                     <CardContent>
                       <p className="text-gray-600">{benefit.description}</p>
                     </CardContent>
-                  </Card>
+                  </ShineBorder>
                 ))}
               </div>
             </div>
@@ -383,8 +402,10 @@ export default function Jc() {
                 ].map((offer, index) => (
                   <div key={index} className="relative">
                     {offer.popular && <PopularBadge />}
-                    <Card className={`bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300 h-full flex flex-col justify-between ${offer.popular ? 'transform hover:scale-105 transition-transform duration-300' : ''}`}>
-                      {offer.popular && <RotatingBorder />}
+                    <ShineBorder
+                    className="bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300"
+                    color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+                    >                      {offer.popular && <RotatingBorder />}
                       <CardHeader>
                         <CardTitle className="text-purple-600">{offer.title}</CardTitle>
                         <CardDescription>
@@ -406,7 +427,7 @@ export default function Jc() {
                           {offer.price === "Sur devis" ? "Demander un devis" : "Choisir"}
                         </Button>
                       </CardFooter>
-                    </Card>
+                    </ShineBorder>
                   </div>
                 ))}
               </div>
