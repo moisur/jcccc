@@ -176,6 +176,8 @@ export default function Jc() {
 
       <main className="relative z-10 pt-20">
         <section className="py-20 px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -183,12 +185,10 @@ export default function Jc() {
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-red-600"
           >
 
-          <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
             <Meteors number={7} />
             <span className="pointer-events-none whitespace-pre-wrap bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
             JC le catalyseur de clarté
             </span>
-          </div>
           </motion.h1>
 
           <motion.p
@@ -210,15 +210,17 @@ export default function Jc() {
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
             >
               <a href="#contact">
-                Commencez votre voyage <ArrowRight className="ml-2" />
+                Commencez votre transformation <ArrowRight className="ml-2" />
               </a>
             </Button>
           </motion.div>
+          </div>
+
+
         </section>
 
         <div className="mx-auto">
-        <AnimatedBeamDemo>
-        </AnimatedBeamDemo>
+
         </div>
         <FadeInSection>
           <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -261,8 +263,9 @@ export default function Jc() {
                   { title: "Développement de la conscience de soi", description: "Affinez votre compréhension de vous-même pour prendre des décisions éclairées.", icon: <Lightbulb className="w-6 h-6 text-purple-600" /> },
                   { title: "Stratégies concrètes", description: "Adoptez des habitudes efficaces pour atteindre vos objectifs personnels et professionnels.", icon: <Target className="w-6 h-6 text-purple-600" /> },
                   { title: "Soutien continu", description: "Bénéficiez d'un accompagnement personnalisé pour assurer votre progression constante.", icon: <Users className="w-6 h-6 text-purple-600" /> }
-                ].map((service, index) => (
-                  <ShineBorder
+                ].  map((service, index) => (
+                  <ShineBorder   
+                  key={index}
                   className="bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300"
                   color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
                   >
@@ -285,7 +288,7 @@ export default function Jc() {
         <FadeInSection>
           <section id="focus-boost" className="py-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Focus Boost : Votre Tremplin vers le Succès</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Votre Tremplin vers le Succès</h2>
               <p className="text-lg mb-8 text-gray-700">
                 La vérité, c&apos;est que votre multipotentialité est votre super pouvoir... une fois que vous avez appris à la maîtriser.
               </p>
@@ -293,7 +296,7 @@ export default function Jc() {
                 Imaginez-vous vous réveiller chaque matin avec une vision claire de votre voie idéale, ressentir une vague de motivation imparable et atteindre vos objectifs sans effort – tout en embrassant la richesse de vos passions.
               </p>
               <p className="text-lg mb-8 text-gray-700">
-                Focus Boost est votre feuille de route personnalisée vers la maîtrise de votre multipotentialité. Oubliez les affirmations creuses et les méthodes miracles. Le &rdquo;Focus Boost&rdquo;, c&apos;est bien plus qu&apos;un simple accompagnement, c&apos;est un véritable tremplin vers la vie qui vous ressemble.
+                Mon accompagnement est votre feuille de route personnalisée vers la maîtrise de votre multipotentialité. Oubliez les affirmations creuses et les méthodes miracles. Le &rdquo;Focus Boost&rdquo;, c&apos;est bien plus qu&apos;un simple accompagnement, c&apos;est un véritable tremplin vers la vie qui vous ressemble.
               </p>
               <h3 className="text-2xl font-bold mb-6 text-purple-600">Ce que vous obtiendrez</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -304,6 +307,7 @@ export default function Jc() {
                   { title: "Vie riche de sens", description: "Transformez vos passions en une carrière épanouissante et donnez vie à vos projets les plus audacieux.", icon: <Rocket className="w-6 h-6 text-purple-600" /> }
                 ].map((benefit, index) => (
                   <ShineBorder
+                  key={index}
                   className="bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300"
                   color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
                   >                    <CardHeader className="flex flex-row items-center space-x-4 pb-2">
@@ -393,16 +397,17 @@ export default function Jc() {
         <FadeInSection>
           <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Nos offres</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Mes offres exclusives</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
-                  { title: "L'Appel Déclic", price: "100€", features: ["60 minutes d'échange intense", "Identification des blocages", "Plan d'action sur 30 jours"] },
-                  { title: "Pack Clarté", price: "240€", features: ["4 appels de 60 minutes", "Suivi par email", "Transformation en profondeur"], popular: true },
-                  { title: "Accompagnement Personnalisé", price: "Sur devis", features: ["Programme sur mesure", "Accompagnement illimité", "Ressources exclusives"] }
+                  { title: "L'Appel Déclic", price: "100€", features: ["60 minutes d'échange", "Identification des blocages", "Plan d'action"] },
+                  { title: "Pack Clarté", price: "240€", features: ["4 appels de 60 minutes", "Suivi quotidien", "Transformation en profondeur"], popular: true },
+                  { title: "All Inclusive", price: "Sur devis", features: ["Programme sur mesure", "Accompagnement illimité", "Ressources exclusives"] }
                 ].map((offer, index) => (
                   <div key={index} className="relative">
                     {offer.popular && <PopularBadge />}
                     <ShineBorder
+                    key={`shine-${index}`} 
                     className="bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300"
                     color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
                     >                      {offer.popular && <RotatingBorder />}
@@ -438,7 +443,7 @@ export default function Jc() {
         <FadeInSection>
           <section id="video" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Découvrez notre approche</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Ce que disent les anciens clients</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="aspect-w-16 aspect-h-9">
                   <video src="https://d1yei2z3i6k35z.cloudfront.net/4371535/65a7efaa2188a_charlesantoine.mp4" controls className="rounded-lg shadow-lg w-full h-full object-cover" playsInline />

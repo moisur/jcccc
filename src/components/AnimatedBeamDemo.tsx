@@ -3,6 +3,7 @@
 import React, { forwardRef, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/magicui/animated-beam";
+import Image from 'next/image';  
 import IconTriste from '../../public/enfant.png'
 import IconHeureux from '../../public/epanouissement-personnel.png'
 
@@ -23,37 +24,38 @@ const Circle = forwardRef<
   );
 });
 
+Circle.displayName = 'Circle';  // Ajouter cette ligne
 export function AnimatedBeamDemo() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const div1Ref = useRef<HTMLDivElement>(null);
-  const div2Ref = useRef<HTMLDivElement>(null);
-
-  return (
-    <div
-      className="relative flex w-full max-w-[500px] items-center justify-center overflow-hidden rounded-lg border bg-background p-10 md:shadow-xl"
-      ref={containerRef}
-    >
-      <div className="flex h-full w-full flex-col justify-between gap-10">
-        <div className="flex flex-row justify-between">
-          <Circle ref={div1Ref}>
-            <img src={IconTriste.src} alt="Triste" className="w-20 h-10" />
-          </Circle>
-          <Circle ref={div2Ref}>
-            <img src={IconHeureux.src} alt="Triste" className="w-10 h-10" />
-          </Circle>
+    const containerRef = useRef<HTMLDivElement>(null);
+    const div1Ref = useRef<HTMLDivElement>(null);
+    const div2Ref = useRef<HTMLDivElement>(null);
+  
+    return (
+      <div
+        className="relative flex w-full max-w-[500px] items-center justify-center overflow-hidden rounded-lg border bg-background p-10 md:shadow-xl"
+        ref={containerRef}
+      >
+        <div className="flex h-full w-full flex-col justify-between gap-10">
+          <div className="flex flex-row justify-between">
+            <Circle ref={div1Ref}>
+              <Image src={IconTriste} alt="Triste" width={80} height={80} />  {/* Ajuster la taille si nécessaire */}
+            </Circle>
+            <Circle ref={div2Ref}>
+              <Image src={IconHeureux} alt="Heureux" width={80} height={80} />  {/* Ajuster la taille si nécessaire */}
+            </Circle>
+          </div>
         </div>
+  
+        <AnimatedBeam
+          duration={3}
+          containerRef={containerRef}
+          fromRef={div1Ref}
+          toRef={div2Ref}
+        />
       </div>
-
-      <AnimatedBeam
-        duration={3}
-        containerRef={containerRef}
-        fromRef={div1Ref}
-        toRef={div2Ref}
-      />
-    </div>
-  );
-}
-
+    );
+  }
+  
 const Icons = {
   openai: () => (
     <svg
