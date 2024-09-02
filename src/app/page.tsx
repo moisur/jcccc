@@ -1,4 +1,5 @@
-import Jc from '../components/Jc';
+import Jc from '@/components/Jc';
+
 
 export default function Home() {
   return (

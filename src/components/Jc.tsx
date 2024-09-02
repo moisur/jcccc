@@ -1,5 +1,4 @@
-'use client'
-
+"use client"
 import React, { useState, useEffect,ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Check, Star, Menu, X, Phone, Mail, MapPin, ArrowUpRight, Lightbulb, Target, Users, Zap, Brain, Heart, Rocket } from 'lucide-react'
@@ -10,9 +9,12 @@ import { Textarea } from "@/components/ui/textarea"
 import { useInView } from 'react-intersection-observer'
 import ShineBorder from "@/components/magicui/shine-border";
 import { AnimatedBeamDemo } from './AnimatedBeamDemo'
+import AnimatedShinyText from './magicui/animated-shiny-text'
 import Meteors from "@/components/magicui/meteors";
+import GradualSpacing from './magicui/gradual-spacing';
 import Image from 'next/image'
 import imaaa from '../../public/1.jpg'
+import { AnimatedListDemo } from './AnimatedListDemo';
 import {
   Accordion,
   AccordionContent,
@@ -153,7 +155,7 @@ export default function Jc() {
           </Button>
         </nav>
       </header>
-
+      
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -177,18 +179,26 @@ export default function Jc() {
       <main className="relative z-10 pt-20">
         <section className="py-20 px-4 sm:px-6 lg:px-8 text-center">
         <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-
+        <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400 cursor-pointer">
+              <span>✨ Vous êtes entre de bonnes mains</span>
+              <ArrowRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+            </AnimatedShinyText>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-red-600"
           >
-
             <Meteors number={7} />
-            <span className="pointer-events-none whitespace-pre-wrap bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
-            JC le catalyseur de clarté
-            </span>
+
+
+            <span className="pointer-events-none whitespace-pre-wrap bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-center text-6xl sm:text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+  <GradualSpacing
+    className="font-display text-center text-2xl sm:text-2xl font-bold tracking-[-0.1em] text-purple-600 dark:text-white md:text-7xl md:leading-[5rem]"
+    text="JC le catalyseur de clarté"
+  />
+</span>
+
           </motion.h1>
 
           <motion.p
@@ -213,15 +223,14 @@ export default function Jc() {
                 Commencez votre transformation <ArrowRight className="ml-2" />
               </a>
             </Button>
+          
           </motion.div>
+          
           </div>
 
 
         </section>
 
-        <div className="mx-auto">
-
-        </div>
         <FadeInSection>
           <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
@@ -295,6 +304,8 @@ export default function Jc() {
               <p className="text-lg mb-8 text-gray-700">
                 Imaginez-vous vous réveiller chaque matin avec une vision claire de votre voie idéale, ressentir une vague de motivation imparable et atteindre vos objectifs sans effort – tout en embrassant la richesse de vos passions.
               </p>
+              <AnimatedListDemo className='mb-20 bg-transparent backdrop-blur-lg'/>
+
               <p className="text-lg mb-8 text-gray-700">
                 Mon accompagnement est votre feuille de route personnalisée vers la maîtrise de votre multipotentialité. Oubliez les affirmations creuses et les méthodes miracles. Mon processus, c&apos;est bien plus qu&apos;un simple accompagnement, c&apos;est un véritable tremplin vers la vie qui vous ressemble.
               </p>
@@ -362,6 +373,9 @@ export default function Jc() {
                 <p>
                   J&apos;ai vécu les mêmes défis que vous. J&apos;ai jonglé avec mes passions, lutté contre mes envies divergentes et ressenti la paralysie face à la pression de &rdquo;choisir une seule chose&rdquo;. Ces expériences m&apos;ont conduit à développer une approche unique pour aider les multipotentiels comme vous à s&apos;apos;épanouir.
                 </p>
+                <div className="flex justify-center items-center">
+                  <AnimatedBeamDemo />
+                </div>
                 <p>
                   Ma motivation pour vous aider vient de mon propre parcours. J&apos;ai transformé mes luttes en force, et je veux partager ce chemin avec vous. Je crois profondément que votre multipotentialité est un don, pas un fardeau, et je suis déterminé à vous montrer comment en faire votre plus grand atout.
                 </p>
@@ -527,6 +541,7 @@ export default function Jc() {
             </div>
           </section>
         </FadeInSection>
+
       </main>
 
       <footer className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 relative z-10">
