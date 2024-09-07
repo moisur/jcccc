@@ -37,6 +37,12 @@ const coachingOptions = [
   "Gérer votre temps efficacement"
 ]
 
+const offerOptions = [
+  "L'Appel Déclic (100€)",
+  "Pack Clarté (240€)",
+  "Programme All Inclusive"
+]
+
 const botResponses = {
   "en savoir plus sur le coaching": {
     content: "Notre coaching est spécialement conçu pour les multipotentiels comme vous. Nous vous aidons à :",
@@ -64,12 +70,7 @@ const botResponses = {
   },
   "découvrir les offres": {
     content: "Voici nos offres adaptées aux besoins des multipotentiels :",
-    options: [
-      "L'Appel Déclic (100€)",
-      "Pack Clarté (240€)",
-      "Programme All Inclusive",
-      "Retour au menu principal"
-    ]
+    options: offerOptions
   },
   "l'appel déclic (100€)": {
     content: "L'Appel Déclic est parfait pour commencer votre parcours. Il comprend 60 minutes d'échange, l'identification des blocages et un plan d'action personnalisé.",
@@ -85,7 +86,7 @@ const botResponses = {
   },
   "passer un appel découverte gratuit": {
     content: "Excellent choix ! Je vais vous rediriger vers le calendrier Calendly de JC pour que vous puissiez choisir un créneau qui vous convient pour votre appel découverte gratuit.",
-    options: ["Voir les disponibilités", "En savoir plus sur les séances", "Retour au menu principal"]
+    options: ["Voir les disponibilités", "Retour au menu principal"]
   },
   "témoignages clients": {
     content: "Voici ce que disent nos clients satisfaits :",
@@ -97,11 +98,7 @@ const botResponses = {
   },
   "voir les disponibilités": {
     content: "J'ai ouvert le calendrier Calendly de JC dans un nouvel onglet. Vous pouvez y choisir le créneau qui vous convient le mieux pour votre appel découverte gratuit. Avez-vous besoin d'autre chose ?",
-    options: [
-      "En savoir plus sur les séances",
-      "Découvrir les offres",
-      "Retour au menu principal"
-    ]
+    options: initialOptions
   },
   "retour au menu principal": {
     content: "Bien sûr ! Comment puis-je vous aider ?",
@@ -110,10 +107,26 @@ const botResponses = {
   "s'inscrire à la newsletter": {
     content: "Merci de votre inscription ! Vous recevrez bientôt des informations exclusives. En attendant, avez-vous d'autres questions ?",
     options: initialOptions
+  },
+  "découvrir les autres offres": {
+    content: "Voici les autres offres que nous proposons :",
+    options: [] 
+  },
+  "réserver l'appel déclic": {
+    content: "J'ai ouvert la page de réservation de l'Appel Déclic dans un nouvel onglet. Vous pouvez y procéder au paiement. Avez-vous besoin d'autre chose ?",
+    options: initialOptions
+  },
+  "réserver le pack clarté": {
+    content: "J'ai ouvert la page de réservation du Pack Clarté dans un nouvel onglet. Vous pouvez y procéder au paiement. Avez-vous besoin d'autre chose ?",
+    options: initialOptions
+  },
+  "en savoir plus sur all inclusive": {
+    content: "J'ai ouvert la page d'information sur le Programme All Inclusive dans un nouvel onglet. N'hésitez pas si vous avez des questions supplémentaires ! Puis-je vous aider avec autre chose ?",
+    options: initialOptions
   }
 }
 
-export default function Chat() {
+export default function Component() {
   const [isOpen, setIsOpen] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
@@ -121,6 +134,7 @@ export default function Chat() {
   const [lastBotMessageId, setLastBotMessageId] = useState<number | null>(null)
   const [isThinking, setIsThinking] = useState(false)
   const [currentCoaching, setCurrentCoaching] = useState<string | null>(null)
+  const [currentOffer, setCurrentOffer] = useState<string | null>(null)
   const scrollAreaRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -184,8 +198,16 @@ export default function Chat() {
           setCurrentCoaching(message)
         }
 
+        if (offerOptions.includes(message)) {
+          setCurrentOffer(message)
+        }
+
         if (responseKey === 'découvrir les autres coaching') {
           botResponse.options = coachingOptions.filter(option => option !== currentCoaching)
+        }
+
+        if (responseKey === 'découvrir les autres offres') {
+          botResponse.options = offerOptions.filter(option => option !== currentOffer)
         }
       } else {
         botResponse = {
