@@ -15,6 +15,8 @@ import GradualSpacing from './magicui/gradual-spacing';
 import Image from 'next/image'
 import imaaa from '../../public/1.jpg'
 import { AnimatedListDemo } from './AnimatedListDemo';
+import CoachingComparison from '../components/CoachingComparison';
+import Chatbot from './Chatbot'
 import {
   Accordion,
   AccordionContent,
@@ -386,7 +388,7 @@ export default function Jc() {
             </div>
           </section>
         </FadeInSection>
-
+              
         <FadeInSection>
           <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
             <div className="max-w-4xl mx-auto">
@@ -407,6 +409,7 @@ export default function Jc() {
             </div>
           </section>
         </FadeInSection>
+
 
         <FadeInSection>
           <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -453,7 +456,18 @@ export default function Jc() {
             </div>
           </section>
         </FadeInSection>
+        <FadeInSection>
+        <h1 className="text-4xl sm:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 my-8">
+          Comparaison Coaching JC
+        </h1>
+          <CoachingComparison 
+            coachingDuration={2} 
+            selfLearningDuration={4} 
+            monthlySalary={3300} 
+            coachingCost={600} 
+          />
 
+        </FadeInSection>
         <FadeInSection>
           <section id="video" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
             <div className="max-w-4xl mx-auto">
@@ -541,7 +555,7 @@ export default function Jc() {
             </div>
           </section>
         </FadeInSection>
-
+        <Chatbot />
       </main>
 
       <footer className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 relative z-10">
