@@ -410,24 +410,26 @@ export default function Jc() {
           </section>
         </FadeInSection>
 
-
         <FadeInSection>
           <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">Mes offres exclusives</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                Mes offres exclusives
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
-                  { title: "L'Appel Déclic", price: "100€", features: ["60 minutes d'échange", "Identification des blocages", "Plan d'action"] },
-                  { title: "Pack Clarté", price: "240€", features: ["4 appels de 60 minutes", "Suivi quotidien", "Transformation en profondeur"], popular: true },
-                  { title: "All Inclusive", price: "Sur devis", features: ["Programme sur mesure", "Accompagnement illimité", "Ressources exclusives"] }
+                  { title: "L'Appel Déclic", price: "100€", features: ["60 minutes d'échange", "Identification des blocages", "Plan d'action"], url: 'https://buy.stripe.com/fZeaFz7Bx0HzaoUcMU' },
+                  { title: "Pack Clarté", price: "240€", features: ["4 appels de 60 minutes", "Suivi quotidien", "Transformation en profondeur"], popular: true, url: 'https://buy.stripe.com/28o293095ai9gNieV3' },
+                  { title: "All Inclusive", price: "Sur devis", features: ["Programme sur mesure", "Accompagnement illimité", "Ressources exclusives"], url: 'https://calendly.com/yervantj' }
                 ].map((offer, index) => (
                   <div key={index} className="relative">
                     {offer.popular && <PopularBadge />}
                     <ShineBorder
-                    key={`shine-${index}`} 
-                    className="bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300"
-                    color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
-                    >                      {offer.popular && <RotatingBorder />}
+                      key={`shine-${index}`}
+                      className="bg-white border-purple-200 hover:border-pink-200 transition-colors duration-300"
+                      color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+                    >
+                      {offer.popular && <RotatingBorder />}
                       <CardHeader>
                         <CardTitle className="text-purple-600">{offer.title}</CardTitle>
                         <CardDescription>
@@ -445,7 +447,14 @@ export default function Jc() {
                         </ul>
                       </CardContent>
                       <CardFooter>
-                        <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
+                        <Button
+                          onClick={() => {
+                            console.log('Button clicked!');
+                            window.open(offer.url, '_blank', 'noopener,noreferrer');
+                          }}
+                          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white cursor-pointer"
+                          style={{ zIndex: 10, position: 'relative' }} // Ajout de style pour le débogage
+                        >
                           {offer.price === "Sur devis" ? "Demander un devis" : "Choisir"}
                         </Button>
                       </CardFooter>
@@ -456,6 +465,8 @@ export default function Jc() {
             </div>
           </section>
         </FadeInSection>
+
+
         <FadeInSection>
         <h1 className="text-4xl sm:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 my-8">
           Comparaison Coaching JC
