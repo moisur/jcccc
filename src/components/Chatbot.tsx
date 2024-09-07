@@ -1,5 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
-
+'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -25,36 +24,66 @@ const introMessages = [
 const initialOptions = [
   "En savoir plus sur le coaching",
   "Découvrir les offres",
-  "Réserver une séance",
+  "Passer un appel découverte gratuit",
   "Témoignages clients"
+]
+
+const coachingOptions = [
+  "Identifier vos forces uniques",
+  "Surmonter le syndrome de l'imposteur",
+  "Développer une stratégie de carrière",
+  "Gérer votre temps efficacement"
 ]
 
 const botResponses = {
   "en savoir plus sur le coaching": {
     content: "Notre coaching est spécialement conçu pour les multipotentiels comme vous. Nous vous aidons à :",
-    options: [
-      "Identifier vos forces uniques",
-      "Surmonter le syndrome de l'imposteur",
-      "Développer une stratégie de carrière",
-      "Gérer votre temps efficacement"
-    ]
+    options: coachingOptions
+  },
+  "identifier vos forces uniques": {
+    content: "Nous vous aidons à identifier et valoriser vos compétences uniques en tant que multipotentiel. Cela vous permettra de mieux vous positionner sur le marché du travail et de trouver des opportunités qui correspondent à vos talents variés.",
+    options: ["Découvrir les autres coaching", "Découvrir les offres", "Passer un appel découverte gratuit", "Retour au menu principal"]
+  },
+  "surmonter le syndrome de l'imposteur": {
+    content: "Beaucoup de multipotentiels souffrent du syndrome de l'imposteur. Nous travaillons ensemble pour renforcer votre confiance en vous et valoriser votre polyvalence comme un atout plutôt qu'une faiblesse.",
+    options: ["Découvrir les autres coaching", "Découvrir les offres", "Passer un appel découverte gratuit", "Retour au menu principal"]
+  },
+  "développer une stratégie de carrière": {
+    content: "Nous élaborons ensemble une stratégie de carrière qui tire parti de votre polyvalence. Que vous souhaitiez combiner plusieurs activités ou trouver un rôle qui exploite vos multiples compétences, nous vous guidons vers vos objectifs professionnels.",
+    options: ["Découvrir les autres coaching", "Découvrir les offres", "Passer un appel découverte gratuit", "Retour au menu principal"]
+  },
+  "gérer votre temps efficacement": {
+    content: "La gestion du temps est cruciale pour les multipotentiels. Nous vous aidons à structurer vos journées pour équilibrer vos différentes passions et projets, tout en restant productif et épanoui.",
+    options: ["Découvrir les autres coaching", "Découvrir les offres", "Passer un appel découverte gratuit", "Retour au menu principal"]
+  },
+  "découvrir les autres coaching": {
+    content: "Voici les autres aspects sur lesquels nous pouvons vous aider :",
+    options: [] // This will be dynamically filled
   },
   "découvrir les offres": {
-    content: "Nous proposons plusieurs formules adaptées à vos besoins :",
+    content: "Voici nos offres adaptées aux besoins des multipotentiels :",
     options: [
       "L'Appel Déclic (100€)",
       "Pack Clarté (240€)",
       "Programme All Inclusive",
-      "Détails des offres"
-    ]
-  },
-  "réserver une séance": {
-    content: "Excellent choix ! Cliquez sur le bouton 'Réserver' en bas du chat pour accéder à mon calendrier Calendly et choisir un créneau qui vous convient.",
-    options: [
-      "Voir les disponibilités",
-      "En savoir plus sur les séances",
       "Retour au menu principal"
     ]
+  },
+  "l'appel déclic (100€)": {
+    content: "L'Appel Déclic est parfait pour commencer votre parcours. Il comprend 60 minutes d'échange, l'identification des blocages et un plan d'action personnalisé.",
+    options: ["Réserver l'Appel Déclic", "Découvrir les autres offres", "Retour au menu principal"]
+  },
+  "pack clarté (240€)": {
+    content: "Le Pack Clarté offre un accompagnement plus approfondi avec 4 appels de 60 minutes, un suivi quotidien et une transformation en profondeur de votre approche multipotentielle.",
+    options: ["Réserver le Pack Clarté", "Découvrir les autres offres", "Retour au menu principal"]
+  },
+  "programme all inclusive": {
+    content: "Le Programme All Inclusive est notre offre la plus complète, entièrement sur mesure. Il comprend un accompagnement illimité et des ressources exclusives pour maximiser votre potentiel.",
+    options: ["En savoir plus sur All Inclusive", "Découvrir les autres offres", "Retour au menu principal"]
+  },
+  "passer un appel découverte gratuit": {
+    content: "Excellent choix ! Je vais vous rediriger vers le calendrier Calendly de JC pour que vous puissiez choisir un créneau qui vous convient pour votre appel découverte gratuit.",
+    options: ["Voir les disponibilités", "En savoir plus sur les séances", "Retour au menu principal"]
   },
   "témoignages clients": {
     content: "Voici ce que disent nos clients satisfaits :",
@@ -65,7 +94,7 @@ const botResponses = {
     ]
   },
   "voir les disponibilités": {
-    content: "J'ai ouvert mon calendrier Calendly dans un nouvel onglet. Vous pouvez y choisir le créneau qui vous convient le mieux. Avez-vous besoin d'autre chose ?",
+    content: "J'ai ouvert le calendrier Calendly de JC dans un nouvel onglet. Vous pouvez y choisir le créneau qui vous convient le mieux pour votre appel découverte gratuit. Avez-vous besoin d'autre chose ?",
     options: [
       "En savoir plus sur les séances",
       "Découvrir les offres",
@@ -79,10 +108,6 @@ const botResponses = {
   "s'inscrire à la newsletter": {
     content: "Merci de votre inscription ! Vous recevrez bientôt des informations exclusives. En attendant, avez-vous d'autres questions ?",
     options: initialOptions
-  },
-  "parler à un coach maintenant": {
-    content: "Je vais vous connecter avec un coach dans quelques instants. En attendant, avez-vous d'autres questions ?",
-    options: initialOptions
   }
 }
 
@@ -93,6 +118,7 @@ export default function Chat() {
   const [inputValue, setInputValue] = useState('')
   const [lastBotMessageId, setLastBotMessageId] = useState<number | null>(null)
   const [isThinking, setIsThinking] = useState(false)
+  const [currentCoaching, setCurrentCoaching] = useState<string | null>(null)
   const scrollAreaRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -108,7 +134,6 @@ export default function Chat() {
       setMessages(allMessages)
       setLastBotMessageId(allMessages.length)
       
-      // Add initial options after a short delay
       setTimeout(() => {
         setMessages(prev => [...prev!, {
             id: (prev?.length ?? 0) + 1,
@@ -120,13 +145,12 @@ export default function Chat() {
         setLastBotMessageId(prev => (prev ?? 0) + 1)
       }, 1000)
     }
-  }, [isOpen, messages]) // Updated dependency array
+  }, [isOpen, messages])
   
   useEffect(() => {
     scrollToBottom()
-  }, [messages, isThinking]) // Updated dependency array
+  }, [messages, isThinking])
   
-
   const scrollToBottom = () => {
     if (scrollAreaRef.current) {
       const scrollElement = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]')
@@ -153,6 +177,14 @@ export default function Chat() {
       const responseKey = message.toLowerCase() as keyof typeof botResponses;
       if (responseKey in botResponses) {
         botResponse = { ...botResponses[responseKey], id: messages.length + 2, type: 'bot', timestamp: new Date() };
+        
+        if (coachingOptions.includes(message)) {
+          setCurrentCoaching(message)
+        }
+
+        if (responseKey === 'découvrir les autres coaching') {
+          botResponse.options = coachingOptions.filter(option => option !== currentCoaching)
+        }
       } else {
         botResponse = {
           id: messages.length + 2,
@@ -163,7 +195,6 @@ export default function Chat() {
         };
       }
       
-
       setMessages(prev => [...prev, botResponse])
       setLastBotMessageId(botResponse.id)
       scrollToBottom()
@@ -172,6 +203,25 @@ export default function Chat() {
 
   const handleOptionClick = (option: string) => {
     handleSendMessage(option, true)
+    
+    // Handle redirects for specific options
+    switch(option.toLowerCase()) {
+      case "réserver l'appel déclic":
+        window.open('https://buy.stripe.com/fZeaFz7Bx0HzaoUcMU', '_blank', 'noopener,noreferrer')
+        break
+      case "réserver le pack clarté":
+        window.open('https://buy.stripe.com/28o293095ai9gNieV3', '_blank', 'noopener,noreferrer')
+        break
+      case "en savoir plus sur all inclusive":
+        window.open('https://calendly.com/yervantj', '_blank', 'noopener,noreferrer')
+        break
+      case "voir les disponibilités":
+        window.open('https://calendly.com/yervantj', '_blank', 'noopener,noreferrer')
+        break
+      case "contacter un ancien client":
+        window.open('https://twitter.com/messages/compose?recipient_id=1789652592076689408', '_blank', 'noopener,noreferrer')
+        break
+    }
   }
 
   const toggleExpand = () => {
@@ -211,7 +261,7 @@ export default function Chat() {
             transition={{ duration: 0.3 }}
           >
             <Card className={`flex flex-col shadow-xl transition-all duration-300 ease-in-out rounded-3xl overflow-hidden ${
-              isExpanded ? 'w-[32rem] h-[40rem]' : 'w-96 h-[32rem]'
+              isExpanded ? 'w-[32rem] h-[32rem]' : 'w-96 h-[32rem]'
             }`}>
               <CardHeader className="flex flex-row items-center justify-between bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4">
                 <h3 className="font-semibold">Chat avec l'assistant de JC</h3>
@@ -312,7 +362,7 @@ export default function Chat() {
                   className="rounded-full border-purple-600 text-purple-600 hover:border-purple-800 hover:text-purple-800 transition-colors duration-300"
                 >
                   <Calendar className="w-4 h-4 mr-2" />
-                  Réserver
+                  Appel découverte gratuit
                 </Button>
                 <Button 
                   variant="outline" 

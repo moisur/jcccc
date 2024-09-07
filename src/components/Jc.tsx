@@ -469,13 +469,16 @@ export default function Jc() {
 
         <FadeInSection>
         <h1 className="text-4xl sm:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 my-8">
-          Comparaison Coaching JC
-        </h1>
+                Calcul rapide 
+        </h1>        
+        <h2 className="text-lg mb-4 text-center">
+                (pour ceux qui ne comprennent pas l'utilité de se faire aider)
+        </h2>
           <CoachingComparison 
-            coachingDuration={2} 
-            selfLearningDuration={4} 
+            coachingDuration={1} 
+            selfLearningDuration={12} 
             monthlySalary={3300} 
-            coachingCost={600} 
+            coachingCost={240} 
           />
 
         </FadeInSection>
