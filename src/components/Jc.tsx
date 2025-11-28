@@ -149,6 +149,7 @@ export default function Jc() {
             <NavItem href="#process">Processus</NavItem>
             <NavItem href="#testimonials">Témoignages</NavItem>
             <NavItem href="#contact">Contact</NavItem>
+            <NavItem href="/onboard">Onboard</NavItem>
           </div>
           <Button
             variant="ghost"
@@ -176,6 +177,7 @@ export default function Jc() {
               <NavItem href="#process">Processus</NavItem>
               <NavItem href="#testimonials">Témoignages</NavItem>
               <NavItem href="#contact">Contact</NavItem>
+              <NavItem href="/onboard">Onboard</NavItem>
             </div>
           </motion.div>
         )}
@@ -557,15 +559,11 @@ export default function Jc() {
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4">
                     <Phone className="w-6 h-6 text-purple-600" />
-                    <span>+33 1 23 45 67 89</span>
+                    <span>+33 6 63 73 89 02</span>
                   </div>
                   <div className="flex items-center space-x-4">
                     <Mail className="w-6 h-6 text-purple-600" />
-                    <span>contact@jc-catalyseur.com</span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <MapPin className="w-6 h-6 text-purple-600" />
-                    <span>123 Rue de la Clarté, 75001 Paris</span>
+                    <span>yervantj@gmail.com</span>
                   </div>
                 </div>
               </div>
