@@ -26,7 +26,7 @@ export const analyzeProfile = async (data: OnboardingData) => {
     Nom: ${data.clientName}
     Lutte principale: ${data.mainStruggle}
     Déclencheur: ${data.triggerEvent}
-    Vision désirée: ${data.desiredOutcome}
+    Vision désirée: ${data.whys.level5}
     
     Profondeur du problème (7 Niveaux):
     1. ${data.whys.level1}

@@ -1,6 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
+
 "use client"
-import React, { useState, useEffect, useRef, ReactNode } from 'react';
+import React, { useState, useEffect, useRef, ReactNode, useCallback } from 'react';
 import { OnboardingData, INITIAL_DATA, StepType } from './types';
+import OnboardPhase from '@/components/OnboardPhase';
 import { Sparkles, Compass, Lightbulb, ArrowRight, CheckCircle, Brain, ChevronRight, ChevronDown, Gem, Target, User, Briefcase, DollarSign, Loader } from '@/components/Icons';
 import { analyzeProfile } from '@/lib/geminiService';
 import Markdown from 'react-markdown';
@@ -420,7 +423,7 @@ const LoadingScreen = () => {
       setTextIndex((prev) => (prev + 1) % loadingTexts.length);
     }, 2500);
     return () => clearInterval(interval);
-  }, []);
+  }, [loadingTexts.length]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[50vh] animate-fade-in">
@@ -470,13 +473,7 @@ const BlueprintPhase = ({ data, updateData }: any) => {
   const [loading, setLoading] = useState(false);
   const reportRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!data.aiAnalysis && process.env.NEXT_PUBLIC_GEMINI_API_KEY) {
-      handleAnalysis();
-    }
-  }, []);
-
-  const handleAnalysis = async () => {
+  const handleAnalysis = useCallback(async () => {
     setLoading(true);
     try {
       const result = await analyzeProfile(data);
@@ -487,7 +484,13 @@ const BlueprintPhase = ({ data, updateData }: any) => {
       // Fake delay to show the nice animation if API is too fast
       setTimeout(() => setLoading(false), 2000);
     }
-  };
+  }, [data, updateData]);
+
+  useEffect(() => {
+    if (!data.aiAnalysis && process.env.NEXT_PUBLIC_GEMINI_API_KEY) {
+      handleAnalysis();
+    }
+  }, [data.aiAnalysis, handleAnalysis]);
 
   const handleDownloadPdf = () => {
     const input = reportRef.current;
@@ -644,21 +647,6 @@ const BlueprintPhase = ({ data, updateData }: any) => {
   );
 };
 
-const OnboardPhase = () => {
-    const [markdownContent, setMarkdownContent] = useState<string>('');
-  
-    useEffect(() => {
-      fetch('/docs/mcp_content.md')
-        .then((response) => response.text())
-        .then((text) => setMarkdownContent(text));
-    }, []);
-  
-    return (
-      <div className="max-w-4xl mx-auto p-8 bg-white shadow-xl rounded-2xl min-h-[60vh] prose prose-purple lg:prose-xl">
-        <Markdown>{markdownContent}</Markdown>
-      </div>
-    );
-}
 
 // --- Main Layout ---
 
@@ -713,7 +701,7 @@ export default function App() {
       case StepType.DEEP_DIVE: return <DeepDivePhase data={data} updateData={updateData} />;
       case StepType.OFFER_FIT: return <OfferPhase data={data} updateData={updateData} />;
       case StepType.BLUEPRINT: return <BlueprintPhase data={data} updateData={updateData} />;
-      case StepType.ONBOARD: return <OnboardPhase />;
+      case StepType.ONBOARD: return <div />;
       default: return null;
     }
   };

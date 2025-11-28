@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { OnboardingData, INITIAL_DATA, StepType } from './types';
-import { Sparkles, Compass, Lightbulb, ArrowRight, CheckCircle, Brain, ChevronRight, ChevronDown, Gem, Target } from './components/Icons';
-import { analyzeProfile } from './services/geminiService';
+/* eslint-disable react/no-unescaped-entities */
+
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { OnboardingData, INITIAL_DATA, StepType } from '../app/onboard/types';
+import { Sparkles, Compass, Lightbulb, ArrowRight, CheckCircle, Brain, ChevronRight, ChevronDown, Gem, Target } from './Icons';
+import { analyzeProfile } from '../lib/geminiService';
+import Markdown from 'react-markdown';
 
 // --- Shared UI Components ---
 
@@ -212,12 +215,12 @@ const DeepDivePhase = ({ data, updateData }: any) => {
                    <div 
                      onClick={() => isCompleted && setActiveLevel(idx)}
                      className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-colors cursor-pointer z-10 bg-clarity-base
-                       ${isActive ? 'border-clarity-gold text-clarity-gold' : 
+                       ${isActive ? 'border-clarity-gold text-clarity-gold' :
                          isCompleted ? 'border-green-500 bg-green-900/20 text-green-500 hover:bg-green-900/40' : 'border-slate-700 text-slate-700'}
                      `}
                    >
                      {isCompleted && <CheckCircle className="w-4 h-4" />}
-                     {isCurrent && <div className="w-1.5 h-1.5 rounded-full bg-clarity-gold animate-pulse" />}
+                     {isActive && <div className="w-1.5 h-1.5 rounded-full bg-clarity-gold animate-pulse" />}
                    </div>
                 </div>
 
@@ -313,13 +316,7 @@ const OfferPhase = ({ data, updateData }: any) => {
 const BlueprintPhase = ({ data, updateData }: any) => {
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!data.aiAnalysis && process.env.API_KEY) {
-      handleAnalysis();
-    }
-  }, []);
-
-  const handleAnalysis = async () => {
+  const handleAnalysis = useCallback(async () => {
     setLoading(true);
     try {
       const result = await analyzeProfile(data);
@@ -329,7 +326,13 @@ const BlueprintPhase = ({ data, updateData }: any) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [data, updateData]);
+
+  useEffect(() => {
+    if (!data.aiAnalysis && process.env.API_KEY) {
+      handleAnalysis();
+    }
+  }, [data.aiAnalysis, handleAnalysis]);
 
   return (
     <div className="animate-slide-up max-w-4xl mx-auto space-y-8">
@@ -410,7 +413,7 @@ const BlueprintPhase = ({ data, updateData }: any) => {
 
 // --- Main Layout ---
 
-const OnboardPhase = () => {
+const OnboardPhaseComponent = () => {
     const [markdownContent, setMarkdownContent] = useState<string>('');
   
     useEffect(() => {
@@ -421,9 +424,9 @@ const OnboardPhase = () => {
   
     return (
       <div className="p-4 h-full w-full markdown-wrapper">
-        <Markdown markdownContent={markdownContent} />
+        <Markdown>{markdownContent}</Markdown>
       </div>
     );
-  }
+}
 
-export default OnboardPhase;
+export default OnboardPhaseComponent;
